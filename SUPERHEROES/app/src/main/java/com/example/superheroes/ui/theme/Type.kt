@@ -5,30 +5,35 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.superheroes.R
+import androidx.compose.ui.text.font.Font
 
+val arbuts = FontFamily(
+    Font(R.font.arbutus_slab)
+)
+val otra = FontFamily(
+    Font(R.font.anton)
+)
 // Set of Material typography styles to start with
-val Typography = Typography(
-    bodyLarge = TextStyle(
-        fontFamily = FontFamily.Default,
+val typography = Typography(
+    displayLarge = TextStyle(
+        fontFamily = otra,
         fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
-    )
-    /* Other default text styles to override
-    titleLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
-        letterSpacing = 0.sp
+        fontSize = 36.sp
+    ),
+    displayMedium = TextStyle(
+        fontFamily = otra,
+        fontWeight = FontWeight.Bold,
+        fontSize = 15.sp
     ),
     labelSmall = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Medium,
-        fontSize = 11.sp,
-        lineHeight = 16.sp,
-        letterSpacing = 0.5.sp
+        fontFamily = arbuts,
+        fontWeight = FontWeight.Bold,
+        fontSize = 12.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = arbuts,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
     )
-    */
 )

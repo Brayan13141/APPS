@@ -8,22 +8,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     Lista()
                 }
@@ -49,14 +50,14 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun Lista(modifier: Modifier = Modifier){
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(1),
+Scaffold(topBar = {Barra()}){ it
+    LazyColumn(contentPadding = it,
         verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier
+        modifier = modifier.width(250.dp)
     ) {
         //SE PASAN LOS OBJETOS A LA LISTA Y CADA OBJETO LLAMA A LA
         //FUNCION CARTAS
@@ -65,32 +66,42 @@ fun Lista(modifier: Modifier = Modifier){
         }
     }
 }
+}
+@Composable
+fun Barra(modifier: Modifier = Modifier
+    .padding(16.dp,16.dp,16.dp,4.dp))
+{
+    Text(text = stringResource(R.string.superheroes),
+        style = MaterialTheme.typography.displayMedium,
+        modifier = Modifier.padding(16.dp,16.dp,16.dp,4.dp))
+}
 @Composable
 fun Cartas(heroe : Super, modifier: Modifier = Modifier) {
-    Card(modifier = modifier.width(15.dp).height(30.dp)) {
-        Row {
-            Column {
+    Card{
+        Row{
+            Column{
                 Text(
                     text = stringResource(id = heroe.nombresuper),
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.labelLarge,
                     modifier = Modifier.padding(16.dp,16.dp,16.dp,4.dp)
                 )
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = heroe.descripcion,
+                        text = heroe.descripcion.toString(),
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
             }
-            Box {
+            Box{
                 Image(
                     painter = painterResource(id = heroe.imagen),
                     contentDescription = null,
                     modifier = modifier
                         .size(width = 68.dp, height = 68.dp)
-                        .aspectRatio(1f).padding(5.dp),
+                        .padding(5.dp)
+                        .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
             }

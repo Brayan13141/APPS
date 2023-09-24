@@ -5,6 +5,6 @@ import androidx.annotation.StringRes
 
 class Super (
         @StringRes val nombresuper: Int,
-        val descripcion: String,
+        val descripcion: Int,
         @DrawableRes val imagen: Int
 )
